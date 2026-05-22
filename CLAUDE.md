@@ -52,10 +52,23 @@ In addition to curl access, the Atlassian MCP server provides native Jira tools 
 - Add comments and worklogs
 
 ### GitHub
-You have access to GitHub via the `gh` CLI and the GitHub MCP server. Use these to:
+You have access to GitHub via the `gh` CLI and the GitHub MCP server. Two accounts are logged in:
+- **christianBongiorno-fd** (work) — default active account
+- **chb0github** (personal)
+
+Switch with `gh auth switch --user <name>`. Always switch back to the previous account when done.
+
+Use these to:
 - Read/create/update PRs and issues
 - View check status, review comments, diffs
 - Search code and repositories
+
+### Global CLAUDE.md Repo
+The global `~/.claude/CLAUDE.md` is tracked in `chb0github/agents` (local: `~/dev/mine/agents`). After any change to the global CLAUDE.md, copy it to the agents repo and push:
+```bash
+cp ~/.claude/CLAUDE.md ~/dev/mine/agents/CLAUDE.md
+cd ~/dev/mine/agents && gh auth switch --user chb0github && git add -A && git commit -m "..." && git push && gh auth switch --user christianBongiorno-fd
+```
 
 ### Jenkins
 You have access to Jenkins CI at https://ci-jenkins.fandango.com/ via REST API. Credentials (user: cbongiorno) are stored in ~/.netrc.
