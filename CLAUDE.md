@@ -96,6 +96,23 @@ curl -sfL "https://nexus3.mgo.com/service/rest/v1/repositories" | jq '.[].name'
 - Search for artifacts: `/service/rest/v1/search?repository=REPO&name=ARTIFACT`
 - Key repos: `maven-central`, `maven-public`, `maven-snapshots`, `production`, `staging`
 
+### Stack Overflow / Stack Exchange
+When the user says "check my stackoverflow" or "search my stackoverflow" for a topic, use the `sof` CLI at `~/.local/bin/sof` to search their posts (user ID: 889053).
+
+```bash
+sof <query>              # keyword search across posts
+sof -t <tag> [query]    # search by tag (+ optional keyword)
+sof -s <site> <query>   # search a specific SE site (default: stackoverflow)
+sof -a [tag]            # list answers (optionally by tag)
+sof -q [tag]            # list questions (optionally by tag)
+sof -n <num> ...        # number of results (default: 10)
+```
+
+Examples:
+- `sof jq` — search posts mentioning jq
+- `sof -t java streams` — search [java] tagged posts for "streams"
+- `sof -s unix -t bash` — search unix.stackexchange for [bash] posts
+
 ### Email (IMAP)
 You have access to the user's personal email via curl+IMAP. Credentials are stored in ~/.netrc.
 Use this to read/search emails when asked.
