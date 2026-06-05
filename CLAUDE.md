@@ -125,39 +125,53 @@ You can create, list, and manage calendar events via `gcalcli` (installed via br
 - OAuth tokens are stored locally after first interactive login.
 
 ### SMS (CallCentric)
-You can send SMS messages from the user's CallCentric number (425) 394-2504 via `~/.local/bin/sms`.
+You can send SMS messages from the user's CallCentric number via `~/.local/bin/sms` (Python CLI).
 
 ```bash
-sms <phone_number> "message text"
+# Send SMS (using sms alias)
+sms send -m "Hey, running late" 703-975-4376
+
+# Send to multiple recipients
+sms send -m "Group message" 7039754376 2533308807
+
+# Send from secondary number
+sms send --from 2533308807 -m "From the other line" 7039754376
+
+# View conversation history
+sms history
+sms history --format json | jq '.[] | select(.from == "17039754376")'
+
+# Check account balance
+cc account balance
+cc account balance --format json
+
+# Add credit
+cc credit buy --amount 20
+
+# List available numbers by area code
+cc number ls --area-code 425
 ```
 
-- Sends from (425) 394-2504 via CallCentric's web AJAX API
-- Session cookies stored in `/tmp/cc_cookies.txt`
+**CLI details:**
+- Installed at `~/.local/bin/cc` and `~/.local/bin/sms`
+- `sms` is an alias for `cc sms` (so `sms send ...` works)
 - Credentials in ~/.netrc as `machine www.callcentric.com`
-- **Must use Firefox User-Agent** to bypass Cloudflare
-- If session expires, the script re-authenticates automatically
-- If email verification is required (new IP/session), fetch the code from Gmail via IMAP (search All Mail for FROM callcentric)
-
-**Direct API call (if script unavailable):**
-```bash
-curl -s -b /tmp/cc_cookies.txt \
-  -A "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:128.0) Gecko/20100101 Firefox/128.0" \
-  -H "Content-Type: application/x-www-form-urlencoded; charset=UTF-8" \
-  -H "X-Requested-With: XMLHttpRequest" \
-  -H "Referer: https://my.callcentric.com/sms_conversation.php?rd=<TO>&ad=14253942504" \
-  -X POST "https://my.callcentric.com/sms.ajax.php" \
-  -d "action=send&rd=<TO>&ad=14253942504&message=<URL_ENCODED_MSG>"
-```
-
-**Login flow (if session expired):**
-1. POST `https://www.callcentric.com/login/` with `go=login&backref=...&l_login=...&l_passwd=...`
-2. If redirected to `email_verify.php`: fetch code from Gmail IMAP (`imaps://imap.gmail.com/%5BGmail%5D/All%20Mail` search FROM callcentric), then POST `email_verify.php` with `go=1&auth_code=<code>`
+- Session cookies: `~/.cache/cc_sms/cookies.txt` (15min TTL)
+- Auto-reauthenticates when session expires
+- Uses Firefox User-Agent to bypass Cloudflare
+- Debug levels: DEBUG=1 (info), DEBUG=2 (HTTP verbose), DEBUG=3 (save responses)
 
 **User's phone numbers:**
 - Google Fi: (703) 975-4376
 - CallCentric texting: (425) 394-2504 (primary, on Pixel 9 Pro)
 - CallCentric secondary: (253) 330-8807
 - CallCentric inactive: (607) 443-1142
+
+**Architecture:**
+- Python 3.7+ with requests library
+- Modular dispatcher with closure-based API client
+- Source: `~/dev/mine/cc_sms` (branch: python-rewrite, merging to master as v2.0.0)
+- Commands: account balance, credit buy, number ls, sms send/history/conversation
 
 ## Bootstrap / CLI Tool Prerequisites
 
