@@ -130,7 +130,7 @@ You can send SMS messages via the Twilio MCP server. Access via MCP tools:
 **Send SMS:**
 Use `mcp__twilio__send_sms` with:
 - `to`: Recipient phone number (E.164 format, e.g., "+17039754376")
-- `from`: Twilio number "+18666506312" (your only number)
+- `from`: Twilio number "+14256754882" (your only number)
 - `body`: Message text (up to 1600 characters)
 
 **Default recipient:** +17039754376 (user's Google Fi number)
@@ -152,7 +152,7 @@ Use `mcp__twilio__list_phone_numbers` to see available Twilio numbers.
 - Trial account: Can only send to verified numbers (verify at https://www.twilio.com/console/phone-numbers/verified)
 
 **User's phone numbers:**
-- Twilio: (866) 650-6312 (+18666506312) - SMS, MMS, Voice enabled
+- Twilio: (425) 675-4882 (+14256754882) - SMS, MMS, Voice enabled (local number, no verification needed)
 - Google Fi: (703) 975-4376 (default recipient)
 - CallCentric (legacy): (425) 394-2504, (253) 330-8807, (607) 443-1142
 
