@@ -124,54 +124,37 @@ You can create, list, and manage calendar events via `gcalcli` (installed via br
 - Create event: `gcalcli add --title "..." --when "..." --duration N --where "..." --description "..."`
 - OAuth tokens are stored locally after first interactive login.
 
-### SMS (CallCentric)
-You can send SMS messages from the user's CallCentric number via `~/.local/bin/sms` (Python CLI).
+### SMS (Twilio)
+You can send SMS messages via the Twilio MCP server. Access via MCP tools:
 
-```bash
-# Send SMS (using sms alias)
-sms send -m "Hey, running late" 703-975-4376
+**Send SMS:**
+Use `mcp__twilio__send_sms` with:
+- `to`: Recipient phone number (E.164 format, e.g., "+17039754376")
+- `from`: Twilio number "+18666506312" (your only number)
+- `body`: Message text (up to 1600 characters)
 
-# Send to multiple recipients
-sms send -m "Group message" 7039754376 2533308807
+**Default recipient:** +17039754376 (user's Google Fi number)
 
-# Send from secondary number
-sms send --from 2533308807 -m "From the other line" 7039754376
+**List recent messages:**
+Use `mcp__twilio__list_messages` with optional filters:
+- `to`: Filter by recipient
+- `from`: Filter by sender  
+- `limit`: Number of messages (default: 20, max: 100)
 
-# View conversation history
-sms history
-sms history --format json | jq '.[] | select(.from == "17039754376")'
+**List phone numbers:**
+Use `mcp__twilio__list_phone_numbers` to see available Twilio numbers.
 
-# Check account balance
-cc account balance
-cc account balance --format json
-
-# Add credit
-cc credit buy --amount 20
-
-# List available numbers by area code
-cc number ls --area-code 425
-```
-
-**CLI details:**
-- Installed at `~/.local/bin/cc` and `~/.local/bin/sms`
-- `sms` is an alias for `cc sms` (so `sms send ...` works)
-- Credentials in ~/.netrc as `machine www.callcentric.com`
-- Session cookies: `~/.cache/cc_sms/cookies.txt` (15min TTL)
-- Auto-reauthenticates when session expires
-- Uses Firefox User-Agent to bypass Cloudflare
-- Debug levels: DEBUG=1 (info), DEBUG=2 (HTTP verbose), DEBUG=3 (save responses)
+**MCP Server details:**
+- Location: `~/.local/share/mcp-servers/twilio-sms/`
+- Configured in: `~/.mcp.json`
+- Credentials: `TWILIO_ACCOUNT_SID` and `TWILIO_AUTH_TOKEN` env vars
+- Authentication: Automatic via environment variables
+- Trial account: Can only send to verified numbers (verify at https://www.twilio.com/console/phone-numbers/verified)
 
 **User's phone numbers:**
-- Google Fi: (703) 975-4376
-- CallCentric texting: (425) 394-2504 (primary, on Pixel 9 Pro)
-- CallCentric secondary: (253) 330-8807
-- CallCentric inactive: (607) 443-1142
-
-**Architecture:**
-- Python 3.7+ with requests library
-- Modular dispatcher with closure-based API client
-- Source: `~/dev/mine/cc_sms` (branch: python-rewrite, merging to master as v2.0.0)
-- Commands: account balance, credit buy, number ls, sms send/history/conversation
+- Twilio: (866) 650-6312 (+18666506312) - SMS, MMS, Voice enabled
+- Google Fi: (703) 975-4376 (default recipient)
+- CallCentric (legacy): (425) 394-2504, (253) 330-8807, (607) 443-1142
 
 ## Bootstrap / CLI Tool Prerequisites
 
