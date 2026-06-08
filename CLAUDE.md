@@ -1,13 +1,11 @@
 # Global Claude Code Configuration
 
-## Behavioral Rules
+## Code Navigation
 
-### Context Display
-At the END of each response (the very last line), show the time, current working directory (relative to ~), and git branch with dirty indicator — mimicking the oh-my-zsh candy theme:
-```
-[HH:MM:SS] 📂 ~/relative/path (branch-name *) ← * if there are uncommitted changes
-[HH:MM:SS] 📂 ~/relative/path (branch-name)   ← clean
-```
+### Prefer LSP Over Grep
+When searching for symbols, references, definitions, or type information, prefer LSP tools (go-to-definition, find-references, workspace-symbol) over grep/ripgrep. LSP is semantically aware and avoids false positives from comments, strings, or similarly-named identifiers. Fall back to grep only when LSP is unavailable or for plain-text/non-code searches.
+
+## Behavioral Rules
 
 ### Bash History
 Every command you run via the Bash tool must be appended to `~/.zsh_history` so the user can find it later. After running a command, append it:
