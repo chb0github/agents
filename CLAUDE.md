@@ -7,6 +7,24 @@ When searching for symbols, references, definitions, or type information, prefer
 
 ## Behavioral Rules
 
+### CLI Command Formatting
+When providing CLI commands to the user:
+- NEVER wrap commands in markdown code blocks (``` ```)
+- Output commands as plain text only
+- Use backslash continuation (\) for multi-line commands
+- Commands must be directly copy-pastable
+
+Example (correct):
+./tf destroy -auto-approve \
+-var=region=us-west-2 \
+-var=aws_profile=default
+
+NOT this (wrong):
+```bash
+./tf destroy -auto-approve \
+-var=region=us-west-2
+```
+
 ### Bash History
 Every command you run via the Bash tool must be appended to `~/.zsh_history` so the user can find it later. After running a command, append it:
 ```bash
