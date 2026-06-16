@@ -11,18 +11,19 @@ When searching for symbols, references, definitions, or type information, prefer
 When providing CLI commands to the user:
 - NEVER wrap commands in markdown code blocks (``` ```)
 - Output commands as plain text only
-- Use backslash continuation (\) for multi-line commands
-- Commands must be directly copy-pastable
+- Output commands as a SINGLE LINE — no backslash continuations
+- Commands must be directly copy-pastable from the terminal without editing
 
 Example (correct):
-./tf destroy -auto-approve \
--var=region=us-west-2 \
--var=aws_profile=default
+./tf destroy -auto-approve -var=region=us-west-2 -var=aws_profile=default
 
-NOT this (wrong):
-```bash
+NOT this (wrong — backslash continuations don't survive copy-paste):
 ./tf destroy -auto-approve \
 -var=region=us-west-2
+
+NOT this (wrong — markdown code block):
+```bash
+./tf destroy -auto-approve -var=region=us-west-2
 ```
 
 ### Bash History
