@@ -36,6 +36,12 @@ Or if that doesn't work in non-interactive mode:
 echo ": $(date +%s):0;the command" >> ~/.zsh_history
 ```
 
+## Preferences
+
+### Tech Stack Defaults
+- **Web apps:** Node.js / Express (not Python/Flask)
+- **Docker images:** Use `FROM scratch` where possible (minimal images)
+
 ## Available Integrations
 
 ### Jira
