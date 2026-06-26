@@ -80,6 +80,27 @@ Use these to:
 - View check status, review comments, diffs
 - Search code and repositories
 
+### GitLab
+You have access to GitLab via the `glab` CLI (authenticated as cbongiorno on source.bongiorno.org:8888).
+
+```bash
+glab auth status                                     # verify auth
+glab repo list --group <group>                       # list repos in a group
+glab repo create <group>/<name> --description "..."  # create new repo in a group
+glab mr list                                         # list merge requests
+glab mr create --title "..." --description "..."     # create MR
+glab issue list                                      # list issues
+glab issue create --title "..." --description "..."  # create issue
+```
+
+- Server: source.bongiorno.org (port 8888 for HTTPS API, port 2222 for SSH)
+- Protocol: SSH for git operations, HTTP for API
+- Groups: `parmail` (mail processing project)
+- SSH clone pattern: `git@source.bongiorno.org:<group>/<repo>.git`
+- When creating repos in a group, use `glab repo create <group>/<name>`
+- Default branch: `main`
+- Push with: `git remote add origin git@source.bongiorno.org:<group>/<repo>.git && git push -u origin main`
+
 ### Global CLAUDE.md Repo
 The global `~/.claude/CLAUDE.md` is tracked in `chb0github/agents` (local: `~/dev/mine/agents`). After any change to the global CLAUDE.md, copy it to the agents repo and push:
 ```bash
