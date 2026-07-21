@@ -2,6 +2,14 @@
 
 ## Code Navigation
 
+### Java Projects: Prefer JavaLens Over Grep or LSP
+For Java codebases, use JavaLens MCP tools — they provide compiler-accurate analysis via Eclipse JDT:
+- `find_references` instead of grep for finding usages
+- `find_implementations` instead of text search for interface implementations
+- `analyze_type` to understand a class before modifying it
+- `get_call_hierarchy` for tracing method call chains
+- Call `load_project` with the project root at the start of each Java session
+
 ### Prefer LSP Over Grep
 When searching for symbols, references, definitions, or type information, prefer LSP tools (go-to-definition, find-references, workspace-symbol) over grep/ripgrep. LSP is semantically aware and avoids false positives from comments, strings, or similarly-named identifiers. Fall back to grep only when LSP is unavailable or for plain-text/non-code searches.
 
@@ -85,6 +93,11 @@ Use these to:
 - Read/create/update PRs and issues
 - View check status, review comments, diffs
 - Search code and repositories
+
+When creating a PR, always add `@copilot` as a reviewer:
+```bash
+gh pr create ... --reviewer copilot
+```
 
 ### GitLab
 You have access to GitLab via the `glab` CLI (authenticated as cbongiorno on source.bongiorno.org:8888).
