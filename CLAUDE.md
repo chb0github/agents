@@ -98,6 +98,7 @@ When creating a PR, always add `@copilot` as a reviewer:
 ```bash
 gh pr create ... --reviewer @copilot
 ```
+After creating the PR, wait for Copilot's review comments to arrive, then read and address them (reply to invalid ones with reasoning + documentation links, fix valid ones).
 
 ### GitLab
 You have access to GitLab via the `glab` CLI (authenticated as cbongiorno on source.bongiorno.org:8888).
