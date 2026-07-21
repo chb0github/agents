@@ -96,7 +96,7 @@ Use these to:
 
 When creating a PR, always add `@copilot` as a reviewer:
 ```bash
-gh pr create ... --reviewer copilot
+gh pr create ... --reviewer @copilot
 ```
 
 ### GitLab
