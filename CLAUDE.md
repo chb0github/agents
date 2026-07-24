@@ -29,6 +29,12 @@ Whenever we begin a new piece of work (a new task/feature/branch):
 Do this proactively at the start of work — don't wait to be asked. If the branch is detached or
 unknown, fall back to `.claude/plans/_no-branch.md` and mention it.
 
+**Durable / shareable plans (opt-in).** The per-branch file above is a local working aid — it's
+gitignored, so it won't follow a rename or land in a clone/worktree/PR. When the user wants a plan
+to be durable or shared (design docs, cross-team efforts, a plan reviewers should see), commit it
+to an explicit in-repo location instead — e.g. `docs/plans/<name>.md` — and reference it from the
+PR. Offer this when a plan is clearly more than a throwaway working aid.
+
 ### CLI Command Formatting
 When providing CLI commands to the user:
 - NEVER wrap commands in markdown code blocks (``` ```)
