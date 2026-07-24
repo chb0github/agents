@@ -52,16 +52,6 @@ echo ": $(date +%s):0;the command" >> ~/.zsh_history
 
 ## Available Integrations
 
-### Jira
-You have direct access to Jira Cloud via REST API. Credentials are stored in ~/.netrc.
-
-```bash
-curl -snL "https://fandango.atlassian.net/rest/api/3/issue/TICKET-KEY" | jq .
-```
-
-- Do NOT use the `-f` curl flag (it silently swallows errors)
-- Use this to read tickets, add comments, update status, or query projects on the user's behalf
-
 ### Confluence
 You have access to Confluence via the Atlassian MCP server (OAuth-authenticated). Use `mcp__atlassian__` tools to:
 - Search pages/content (`searchConfluenceUsingCql`, `search`)
@@ -74,6 +64,16 @@ Also accessible via curl with ~/.netrc:
 ```bash
 curl -snL "https://fandango.atlassian.net/wiki/rest/api/content?spaceKey=SPACE&title=Page+Title" | jq .
 ```
+
+### Jira
+Prefer the atlassian MCP server over REST, but if needed, use the below as an example (curl has credentials)
+```bash
+curl -snL "https://fandango.atlassian.net/rest/api/3/issue/TICKET-KEY" | jq .
+```
+
+- Do NOT use the `-f` curl flag (it silently swallows errors), instead use --fail-with-body
+- **Story Points field: `customfield_10002`** (the "Story Points" field used across projects, e.g. AVOD). Set it on create/edit, e.g. `"customfield_10002": 3`. (Note: `customfield_14169` "Story point estimate" exists but is NOT the one in use; `customfield_16923` is "QA Story Points".)
+
 
 ### Jira (MCP)
 In addition to curl access, the Atlassian MCP server provides native Jira tools (`mcp__atlassian__` prefix):
