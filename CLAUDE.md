@@ -30,6 +30,14 @@ Whenever we begin a new piece of work (a new task/feature/branch):
 Do this proactively at the start of work — don't wait to be asked. If the branch is detached or
 unknown, fall back to `.claude/plans/_no-branch.md` and mention it.
 
+**Multi-repo changes.** When one piece of work spans multiple repos (e.g. publish an artifact in
+repo A, build a library in repo B, integrate it in repo C), drop a per-branch plan into *each*
+affected repo — same `.claude/plans/<branch>.md` convention, scoped to that repo's slice of the
+work — in addition to any central/session plan. Each repo's plan should carry enough context to
+stand alone (what changed here and why, links to the other repos' PRs/tickets), so whoever picks up
+that repo next — including you, on a fresh session in just that checkout — has the thread. Keep the
+`.claude/` gitignore rule satisfied in every one of them.
+
 **Durable / shareable plans (opt-in).** The per-branch file above is a local working aid — it's
 gitignored, so it won't follow a rename or land in a clone/worktree/PR. When the user wants a plan
 to be durable or shared (design docs, cross-team efforts, a plan reviewers should see), commit it
