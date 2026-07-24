@@ -24,7 +24,8 @@ Whenever we begin a new piece of work (a new task/feature/branch):
    if missing; update it as work progresses.
 3. On resume / at the start of work, read the plan for the *current* branch (not a fixed path).
    If none exists for this branch, treat it as new work.
-4. Prompt the user with "what's the plan?" and enter plan mode to align before implementing.
+4. Prompt the user with "what's the plan?", enter plan mode, and engage deep/extended thinking to
+   align before implementing.
 
 Do this proactively at the start of work — don't wait to be asked. If the branch is detached or
 unknown, fall back to `.claude/plans/_no-branch.md` and mention it.
