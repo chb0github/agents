@@ -15,15 +15,19 @@ When searching for symbols, references, definitions, or type information, prefer
 
 ## Behavioral Rules
 
-### Starting Work — repo-local plan
+### Starting Work — repo-local, per-branch plan
 Whenever we begin a new piece of work (a new task/feature/branch):
-1. Ensure `.claude/plan.md` is gitignored in the repo. If the repo's `.gitignore` doesn't already
-   ignore it, add a `.claude/plan.md` (or `.claude/`) entry. Never commit the plan file.
-2. Maintain the plan at `.claude/plan.md` in the repo (repo-local, so it travels with the working
-   tree but stays out of diffs/PRs). Create it if missing; update it as work progresses.
-3. Prompt the user with "what's the plan?" and enter plan mode to align before implementing.
+1. Ensure the repo's `.gitignore` ignores `.claude/` (add it if missing). Never commit plan files.
+2. Maintain the plan at **`.claude/plans/<branch>.md`**, keyed by the current branch
+   (`git branch --show-current`, slashes preserved as subdirs). Per-branch so switching branches
+   never shows a stale plan — the active plan is always the file for the current branch. Create it
+   if missing; update it as work progresses.
+3. On resume / at the start of work, read the plan for the *current* branch (not a fixed path).
+   If none exists for this branch, treat it as new work.
+4. Prompt the user with "what's the plan?" and enter plan mode to align before implementing.
 
-Do this proactively at the start of work — don't wait to be asked.
+Do this proactively at the start of work — don't wait to be asked. If the branch is detached or
+unknown, fall back to `.claude/plans/_no-branch.md` and mention it.
 
 ### CLI Command Formatting
 When providing CLI commands to the user:
