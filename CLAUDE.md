@@ -15,6 +15,16 @@ When searching for symbols, references, definitions, or type information, prefer
 
 ## Behavioral Rules
 
+### Starting Work — repo-local plan
+Whenever we begin a new piece of work (a new task/feature/branch):
+1. Ensure `.claude/plan.md` is gitignored in the repo. If the repo's `.gitignore` doesn't already
+   ignore it, add a `.claude/plan.md` (or `.claude/`) entry. Never commit the plan file.
+2. Maintain the plan at `.claude/plan.md` in the repo (repo-local, so it travels with the working
+   tree but stays out of diffs/PRs). Create it if missing; update it as work progresses.
+3. Prompt the user with "what's the plan?" and enter plan mode to align before implementing.
+
+Do this proactively at the start of work — don't wait to be asked.
+
 ### CLI Command Formatting
 When providing CLI commands to the user:
 - NEVER wrap commands in markdown code blocks (``` ```)
