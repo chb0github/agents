@@ -44,6 +44,20 @@ to be durable or shared (design docs, cross-team efforts, a plan reviewers shoul
 to an explicit in-repo location instead — e.g. `docs/plans/<name>.md` — and reference it from the
 PR. Offer this when a plan is clearly more than a throwaway working aid.
 
+### Notify me when you're blocked and I'm away
+If you ask me a question (or otherwise pause needing my input) and no reply arrives within
+**5 minutes**, email me the question via the `notify` skill's two-way ask-me mode, then keep
+polling for my reply and act on it when it comes. Don't sit idle waiting — the whole point is I may
+have walked away. This applies to any blocking prompt: clarifications, approvals, "which option",
+etc. (Prefer deciding routine things yourself rather than asking — but when you genuinely need me
+and I'm not responding, reach me by email.)
+
+### Make routine decisions yourself
+Don't ask me to decide things you can reasonably decide on your own (branch names, file names,
+commit message wording, obvious defaults, which of two equivalent approaches). Pick a sensible
+option, state what you picked, and proceed. Reserve questions for decisions that genuinely need my
+input — trade-offs I care about, irreversible actions, or ambiguous requirements.
+
 ### CLI Command Formatting
 When providing CLI commands to the user:
 - NEVER wrap commands in markdown code blocks (``` ```)
